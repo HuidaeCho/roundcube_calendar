@@ -189,11 +189,13 @@ class Property extends Node {
             '\\',
             "\n",
             "\r",
+            ',',
         );
         $out = array(
             '\\\\',
             '\n',
             '',
+            '\,',
         );
 
         // avoid double-escaping of \, and \; from Compound properties

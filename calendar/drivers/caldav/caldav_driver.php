@@ -1467,7 +1467,12 @@ class caldav_driver extends calendar_driver
      */
     private function add_attachment($attachment, $event_id)
     {
-        $data = $attachment['data'] ? $attachment['data'] : file_get_contents($attachment['path']);
+        if (isset($attachment['data']))
+            $data = $attachment['data'];
+        elseif (isset($attachment['path']) && $attachment['path'] != '')
+            $data = file_get_contents($attachment['path']);
+        else
+            return 0;
 
         $query = $this->rc->db->query(
             "INSERT INTO " . $this->db_attachments .
