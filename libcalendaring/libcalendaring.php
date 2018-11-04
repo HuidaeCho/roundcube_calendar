@@ -296,17 +296,17 @@ class libcalendaring extends rcube_plugin
         $time_format = self::to_php_date_format($this->rc->config->get('calendar_time_format', $this->defaults['calendar_time_format']));
 
         if ($event['allday']) {
-            $fromto = format_date($event['start'], $date_format);
-            if (($todate = format_date($event['end'], $date_format)) != $fromto)
+            $fromto = $this->rc->format_date($event['start'], $date_format);
+            if (($todate = $this->rc->format_date($event['end'], $date_format)) != $fromto)
                 $fromto .= ' - ' . $todate;
         }
         else if ($duration < 86400 && $event['start']->format('d') == $event['end']->format('d')) {
-            $fromto = format_date($event['start'], $date_format) . ' ' . format_date($event['start'], $time_format) .
-                ' - ' . format_date($event['end'], $time_format);
+            $fromto = $this->rc->format_date($event['start'], $date_format) . ' ' . $this->rc->format_date($event['start'], $time_format) .
+                ' - ' . $this->rc->format_date($event['end'], $time_format);
         }
         else {
-            $fromto = format_date($event['start'], $date_format) . ' ' . format_date($event['start'], $time_format) .
-                ' - ' . format_date($event['end'], $date_format) . ' ' . format_date($event['end'], $time_format);
+            $fromto = $this->rc->format_date($event['start'], $date_format) . ' ' . $this->rc->format_date($event['start'], $time_format) .
+                ' - ' . $this->rc->format_date($event['end'], $date_format) . ' ' . $this->rc->format_date($event['end'], $time_format);
         }
 
         // add timezone information
@@ -798,7 +798,7 @@ class libcalendaring extends rcube_plugin
             $until =  $this->gettext(array('name' => 'forntimes', 'vars' => array('nr' => $rrule['COUNT'])));
         }
         else if ($rrule['UNTIL']) {
-            $until = $this->gettext('recurrencend') . ' ' . format_date($rrule['UNTIL'], self::to_php_date_format($this->rc->config->get('calendar_date_format', $this->defaults['calendar_date_format'])));
+            $until = $this->gettext('recurrencend') . ' ' . $this->rc->format_date($rrule['UNTIL'], self::to_php_date_format($this->rc->config->get('calendar_date_format', $this->defaults['calendar_date_format'])));
         }
         else {
             $until = $this->gettext('forever');
@@ -808,7 +808,7 @@ class libcalendaring extends rcube_plugin
         if (is_array($rrule['EXDATE']) && !empty($rrule['EXDATE'])) {
           $format = self::to_php_date_format($this->rc->config->get('calendar_date_format', $this->defaults['calendar_date_format']));
           $exdates = array_map(
-            function($dt) use ($format) { return format_date($dt, $format); },
+            function($dt) use ($format) { return $this->rc->format_date($dt, $format); },
             array_slice($rrule['EXDATE'], 0, 10)
           );
           $except = '; ' . $this->gettext('except') . ' ' . join(', ', $exdates);

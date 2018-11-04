@@ -16,7 +16,7 @@ to support CalDAV calendars.
 
 Getting this all to work is a bit of a hassle so we - Faster IT GmbH - decided to
 combine the various parts into a distribution when we were asked to implement this for a nonprofit company.
-For the public benefit we re-publish the work under the origiginal AGPLv3+ license.
+For the public benefit we re-publish the work under the original AGPLv3+ license.
 
 This version is compatible with the [rcmcarddav plugin](https://github.com/blind-coder/rcmcarddav)
 from [Benjamin Schieder](http://www.benjamin-schieder.de/carddav.html).    
@@ -38,7 +38,7 @@ of your roundcube installation:
 
     $ git clone git://github.com/fasterit/roundcube_calendar.git
     $ cd roundcube_calendar
-    $ cd -r calendar/ libcalendaring/ /var/www/htdocs/roundcube/plugins/ # adjust as needed
+    $ cp -r calendar/ libcalendaring/ /var/www/htdocs/roundcube/plugins/ # adjust as needed
 
 Copy and edit the supplied config.inc.php.dist:
 

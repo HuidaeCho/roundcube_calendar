@@ -748,10 +748,14 @@ class libvcalendar implements Iterator
 
     /**
      *
+        fix 
+        '\,' -> ','
+        '\;' -> ';'
      */
     public static function convert_string($prop)
     {
-        return str_replace('\,', ',', strval($prop->value));
+        return str_replace(array('\,','\;'),array(',',';'), strval($prop->value));
+
     }
 
     /**
